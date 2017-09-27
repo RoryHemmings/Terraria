@@ -1,2 +1,2 @@
 # Terraria
-# this is simple Terraria like game
+Thisis a simple Terraria like game
