@@ -1,6 +1,8 @@
 package dev.terraria.game.entitys.creatures;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import dev.terraria.game.Handler;
 import dev.terraria.game.gfx.Assets;
@@ -16,8 +18,8 @@ public class Player extends Creature {
 
 	public static int groundOffset;
 
-	public Player(Handler handler, int x, int y, int size) {
-		super(handler, x, y);
+	public Player(Handler handler, int x, int y, int size, Rectangle collisionBox) {
+		super(handler, x, y, collisionBox);
 		this.size = size;
 		this.width = Assets.player_right.getWidth();
 		this.height = Assets.player_right.getHeight();
@@ -31,11 +33,11 @@ public class Player extends Creature {
 	public void tick() {
 		handleInput();
 		move();
+		updateCollisionBoxPosition();
 
-		updateGroundOffset();
 		addGravity();
 		checkJump();
-		checkIfGrounded();
+//		checkIfGrounded();
 	}
 
 	public void handleInput() {
@@ -67,10 +69,6 @@ public class Player extends Creature {
 			this.setMoving(true);
 	}
 
-	public void updateGroundOffset() {
-
-	}
-
 	public void checkIfGrounded() {
 		if (y >= groundOffset) {
 			y = groundOffset;
@@ -87,6 +85,9 @@ public class Player extends Creature {
 		else if (direction == RIGHT)
 			g.drawImage(Assets.player_right, x, y, Assets.player_right.getWidth() * size,
 					Assets.player_right.getHeight() * size, null);
+		
+		g.setColor(Color.red);
+		g.fillRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 
 	public int getX() {

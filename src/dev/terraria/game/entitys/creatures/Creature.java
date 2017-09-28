@@ -1,8 +1,9 @@
 package dev.terraria.game.entitys.creatures;
 
+import java.awt.Rectangle;
+
 import dev.terraria.game.Handler;
 import dev.terraria.game.entitys.Entity;
-import dev.terraria.game.tiles.Tile;
 
 public abstract class Creature extends Entity {
 
@@ -17,26 +18,26 @@ public abstract class Creature extends Entity {
 
 	protected boolean jump = false;
 	protected boolean continueJumping = true;
+	
+	protected Rectangle collisionBox;
 
-	public Creature(Handler handler, int x, int y) {
+	public Creature(Handler handler, int x, int y, Rectangle collisionBox) {
 		super(handler, x, y);
+		this.collisionBox = collisionBox;
+		System.out.println(collisionBox);
 	}
 
 	public void move() {
 		x += moveX;
 		y = (int) (y - (handler.getGame().getDeltaTime() * power));
 	}
+	
+	protected void updateCollisionBoxPosition() {
+		collisionBox.x = x + collisionBox.width/2;
+		collisionBox.y = y + collisionBox.height/2;
+	}
 
 	public void jump() {
-//		y = (int) (y - (handler.getGame().getDeltaTime() * power));
-//		power = power + (handler.getGame().getDeltaTime() * gravity);
-//		if (y > Player.groundOffset) {
-//			y = Player.groundOffset;
-//			power = 10;
-//			jump = false;
-//			continueJumping = false;
-//		}
-		//y = (int) (y - (handler.getGame().getDeltaTime() * power));
 		power = jump_power;
 		hasLanded = false;
 	}
@@ -60,6 +61,10 @@ public abstract class Creature extends Entity {
 
 	public void setMoving(boolean m) {
 		isMoving = m;
+	}
+	
+	public Rectangle getCollisionBox() {
+		return collisionBox;
 	}
 
 	public boolean isGrounded() {
