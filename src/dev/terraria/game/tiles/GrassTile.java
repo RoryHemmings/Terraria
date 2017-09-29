@@ -1,13 +1,12 @@
 package dev.terraria.game.tiles;
 
-import java.awt.Rectangle;
-
 import dev.terraria.game.gfx.Assets;
 
 public class GrassTile extends Tile {
 	
-	public GrassTile(int id, Rectangle collisionBox) {
-		super(Assets.grass_block, id, collisionBox);
+	public GrassTile(int x, int y, int width, int height) {
+		super(x, y, width, height);
+		this.texture = Assets.grass_block;
 	}
 	
 }

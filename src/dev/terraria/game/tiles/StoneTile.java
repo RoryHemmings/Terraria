@@ -1,11 +1,10 @@
 package dev.terraria.game.tiles;
 
-import java.awt.Rectangle;
-
 import dev.terraria.game.gfx.Assets;
 
 public class StoneTile extends Tile {
-	public StoneTile(int id, Rectangle collisionBox) {
-		super(Assets.stone_block, id, collisionBox);
+	public StoneTile(int x, int y, int width, int height) {
+		super(x, y, width, height);
+		this.texture = Assets.stone_block;
 	}
 }
