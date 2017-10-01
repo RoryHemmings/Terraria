@@ -28,7 +28,6 @@ public class Tile {
 	
 	public void render(Graphics g) {
 		g.drawImage(texture, x, y, width, height, null);
-		g.fillRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 	
 	public int getID() {

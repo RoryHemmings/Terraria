@@ -26,7 +26,7 @@ public class World {
 		this.width = handler.getWidth();
 		this.height = handler.getHeight();
 
-		entityManager = new EntityManager(handler, new Player(handler, 0, 0, 4, new Rectangle(Assets.player_right.getWidth() * 4, Assets.player_right.getWidth() * 4)));
+		entityManager = new EntityManager(handler, new Player(handler, 0, 0, 4));
 		loadWorld();
 	}
 

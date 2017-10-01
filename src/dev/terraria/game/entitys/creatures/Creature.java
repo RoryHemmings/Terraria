@@ -18,12 +18,13 @@ public abstract class Creature extends Entity {
 
 	protected boolean jump = false;
 	protected boolean continueJumping = true;
+	private boolean first = true;
 	
 	protected Rectangle collisionBox;
 
-	public Creature(Handler handler, int x, int y, Rectangle collisionBox) {
+	public Creature(Handler handler, int x, int y) {
 		super(handler, x, y);
-		this.collisionBox = collisionBox;
+		this.collisionBox = new Rectangle(0, 0);
 		System.out.println(collisionBox);
 	}
 
@@ -33,8 +34,13 @@ public abstract class Creature extends Entity {
 	}
 	
 	protected void updateCollisionBoxPosition() {
-		collisionBox.x = x + collisionBox.width/2;
-		collisionBox.y = y + collisionBox.height/2;
+		if (first) {
+			collisionBox.width = width;
+			collisionBox.height = height;
+			first = false;
+		}
+		collisionBox.x = x;
+		collisionBox.y = y;
 	}
 
 	public void jump() {

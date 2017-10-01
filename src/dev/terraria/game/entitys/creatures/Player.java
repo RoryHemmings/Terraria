@@ -18,11 +18,11 @@ public class Player extends Creature {
 
 	public static int groundOffset;
 
-	public Player(Handler handler, int x, int y, int size, Rectangle collisionBox) {
-		super(handler, x, y, collisionBox);
+	public Player(Handler handler, int x, int y, int size) {
+		super(handler, x, y);
 		this.size = size;
-		this.width = Assets.player_right.getWidth();
-		this.height = Assets.player_right.getHeight();
+		this.width = Assets.player_right.getWidth()*size;
+		this.height = Assets.player_right.getHeight()*size;
 
 		groundOffset = handler.getHeight() - height * size - Tile.TILEHEIGHT;
 		// this.y = groundOffset;
@@ -85,9 +85,6 @@ public class Player extends Creature {
 		else if (direction == RIGHT)
 			g.drawImage(Assets.player_right, x, y, Assets.player_right.getWidth() * size,
 					Assets.player_right.getHeight() * size, null);
-		
-		g.setColor(Color.red);
-		g.fillRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 
 	public int getX() {
